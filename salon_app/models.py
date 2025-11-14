@@ -51,7 +51,7 @@ class Appointment(models.Model):
     )
 
     def __str__(self):
-        return f"{self.customer.name} - {self.service.name} ({self.appointment_date})"
+        return f"{self.customer.first_name} {self.customer.last_name} - {self.service.name} ({self.appointment_date})"
 
 
 class Payment(models.Model):
@@ -68,5 +68,5 @@ class Payment(models.Model):
     )
 
     def __str__(self):
-        return f"Payment for {self.appointment.customer.name} - ${self.amount}"
+        return f"Payment for {self.appointment.customer.first_name} - ${self.amount}"
 
