@@ -1,0 +1,12 @@
+[
+  {"model": "salon_app.customer", "pk": 1, "fields": {"first_name": "Alice", "last_name": "Johnson", "email": "alice@example.com", "phone": "5551000001", "date_joined": "2025-01-01T09:00:00"}},
+  {"model": "salon_app.customer", "pk": 2, "fields": {"first_name": "Bob", "last_name": "Smith", "email": "bob@example.com", "phone": "5551000002", "date_joined": "2025-01-02T10:15:00"}},
+  {"model": "salon_app.customer", "pk": 3, "fields": {"first_name": "Carla", "last_name": "Martinez", "email": "carla@example.com", "phone": "5551000003", "date_joined": "2025-01-03T11:45:00"}},
+  {"model": "salon_app.customer", "pk": 4, "fields": {"first_name": "David", "last_name": "Lee", "email": "david@example.com", "phone": "5551000004", "date_joined": "2025-01-04T13:00:00"}},
+  {"model": "salon_app.customer", "pk": 5, "fields": {"first_name": "Elena", "last_name": "Brown", "email": "elena@example.com", "phone": "5551000005", "date_joined": "2025-01-05T14:20:00"}},
+  {"model": "salon_app.customer", "pk": 6, "fields": {"first_name": "Frank", "last_name": "Hughes", "email": "frank@example.com", "phone": "5551000006", "date_joined": "2025-01-06T09:30:00"}},
+  {"model": "salon_app.customer", "pk": 7, "fields": {"first_name": "Grace", "last_name": "Nguyen", "email": "grace@example.com", "phone": "5551000007", "date_joined": "2025-01-07T16:00:00"}},
+  {"model": "salon_app.customer", "pk": 8, "fields": {"first_name": "Henry", "last_name": "Adams", "email": "henry@example.com", "phone": "5551000008", "date_joined": "2025-01-08T12:10:00"}},
+  {"model": "salon_app.customer", "pk": 9, "fields": {"first_name": "Isabella", "last_name": "Reed", "email": "isabella@example.com", "phone": "5551000009", "date_joined": "2025-01-09T15:40:00"}},
+  {"model": "salon_app.customer", "pk": 10, "fields": {"first_name": "Jack", "last_name": "Turner", "email": "jack@example.com", "phone": "5551000010", "date_joined": "2025-01-10T08:55:00"}}
+]

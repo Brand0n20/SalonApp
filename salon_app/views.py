@@ -1,12 +1,12 @@
+from .models import Customer, Appointment, Service, Employee, Payment
 from django.http import HttpResponse
 from django.shortcuts import render, get_object_or_404
-from .models import Customer, Appointment, Service, Employee, Payment
 
 def home(request):
     return HttpResponse("<h1>Welcome to Reimagined Studio!</h1")
 
 def services_list(request):
-    services = Service.objects.filter(is_active=True)
+    services = Service.objects.all()
     return render(request, 'salon_app/services_list.html', {'services': services})
 
 def book_appointment(request):
@@ -19,3 +19,7 @@ def customer_profile(request, customer_id):
         'customer': customer,
         'appointments': appointments
     })
+
+def customers_list(request):
+    customers = Customer.objects.all()
+    return render(request, 'salon_app/customer_list.html', {'customers': customers})
