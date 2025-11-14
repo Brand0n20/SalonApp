@@ -32,7 +32,7 @@ class Service(models.Model):
 
 class Appointment(models.Model):
     customer = models.ForeignKey(Customer, on_delete=models.CASCADE)
-    stylist = models.ForeignKey(Stylist, on_delete=models.SET_NULL, null=True)
+    employee = models.ForeignKey(Employee, on_delete=models.SET_NULL, null=True)
     service = models.ForeignKey(Service, on_delete=models.CASCADE)
     appointment_date = models.DateTimeField()
     status = models.CharField(

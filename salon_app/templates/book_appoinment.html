@@ -1,0 +1,23 @@
+{% extends 'salon_app/base.html' %}
+{% block title %}Book Appointment{% endblock %}
+{% block content %}
+<h2>Book an Appointment</h2>
+
+<form method="POST">
+    {% csrf_token %}
+    <label for="service">Select Service:</label>
+    <select name="service" id="service">
+        {% for service in services %}
+            <option value="{{ service.id }}">{{ service.name }} ({{ service.duration }} mins)</option>
+        {% endfor %}
+    </select><br><br>
+
+    <label for="date">Date:</label>
+    <input type="date" name="date" required><br><br>
+
+    <label for="time">Time:</label>
+    <input type="time" name="time" required><br><br>
+
+    <button type="submit">Book</button>
+</form>
+{% endblock %}
