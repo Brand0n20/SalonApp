@@ -5,8 +5,9 @@
 <ul>
   {% for service in services %}
     <li>
-      <strong>{{ service.name }}</strong> — {{ service.description }}  
-      ({{ service.duration }} mins)
+      <strong>{{ service.name }}</strong> - {{ service.price}}
+      <li>{{ service.description }}</li>
+      <li>Duration: {{ service.duration_minutes }} mins</li>
     </li>
   {% empty %}
     <li>No services available right now.</li>
