@@ -1,0 +1,12 @@
+[
+  {"model": "salon_app.employee", "pk": 1, "fields": {"first_name": "Sophia", "last_name": "Kim", "specialty": "Stylist", "email": "sophia.kim@example.com", "phone": "5552000001", "availability_status": "available"}},
+  {"model": "salon_app.employee", "pk": 2, "fields": {"first_name": "Liam", "last_name": "Parker", "specialty": "Barber", "email": "liam.parker@example.com", "phone": "5552000002", "availability_status": "available"}},
+  {"model": "salon_app.employee", "pk": 3, "fields": {"first_name": "Olivia", "last_name": "Stone", "specialty": "Nail Tech", "email": "olivia.stone@example.com", "phone": "5552000003", "availability_status": "busy"}},
+  {"model": "salon_app.employee", "pk": 4, "fields": {"first_name": "Noah", "last_name": "Gray", "specialty": "Stylist", "email": "noah.gray@example.com", "phone": "5552000004", "availability_status": "available"}},
+  {"model": "salon_app.employee", "pk": 5, "fields": {"first_name": "Emma", "last_name": "Davis", "specialty": "Makeup Artist", "email": "emma.davis@example.com", "phone": "5552000005", "availability_status": "off"}},
+  {"model": "salon_app.employee", "pk": 6, "fields": {"first_name": "James", "last_name": "Clark", "specialty": "Stylist", "email": "james.clark@example.com", "phone": "5552000006", "availability_status": "available"}},
+  {"model": "salon_app.employee", "pk": 7, "fields": {"first_name": "Mia", "last_name": "Hall", "specialty": "Receptionist", "email": "mia.hall@example.com", "phone": "5552000007", "availability_status": "available"}},
+  {"model": "salon_app.employee", "pk": 8, "fields": {"first_name": "Alexander", "last_name": "King", "specialty": "Manager", "email": "alex.king@example.com", "phone": "5552000008", "availability_status": "busy"}},
+  {"model": "salon_app.employee", "pk": 9, "fields": {"first_name": "Ava", "last_name": "Moore", "specialty": "Stylist", "email": "ava.moore@example.com", "phone": "5552000009", "availability_status": "available"}},
+  {"model": "salon_app.employee", "pk": 10, "fields": {"first_name": "William", "last_name": "Harris", "specialty": "Barber", "email": "william.harris@example.com", "phone": "5552000010", "availability_status": "off"}}
+]
