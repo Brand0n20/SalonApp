@@ -1,5 +1,5 @@
 from .models import Customer, Appointment, Service, Employee, Payment
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseForbidden
 from django.shortcuts import render, get_object_or_404
 from django.contrib.auth import authenticate, login, logout
 from .forms import CustomerRegistrationForm
@@ -18,7 +18,7 @@ def book_appointment(request):
 
 def appointments(request):
     # Need to return diff types base on customer or employee
-    return render(request)
+    return render(request, )
 
 def customer_profile(request, customer_id):
     customer = get_object_or_404(Customer, id=customer_id)
@@ -29,6 +29,9 @@ def customer_profile(request, customer_id):
     })
 
 def customers_list(request):
+    if not request.user.is_staff:
+        return {HttpResponseForbidden("You do not have permission to view this page")}
+    
     customers = Customer.objects.all()
     return render(request, 'salon_app/customer_list.html', {'customers': customers})
 

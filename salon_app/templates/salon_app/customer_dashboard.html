@@ -1,8 +1,15 @@
+{% extends 'salon_app/base.html' %}
+{% block content %}
 <h1>Welcome, {{ customer.first_name }}!</h1>
 
 <h2>Your Appointments:</h2>
 <ul>
+    {% if appointments %}
     {% for a in appointments %}
         <li>{{ a.appointment_date }} — {{ a.service.name }} with {{ a.employee.first_name }}</li>
     {% endfor %}
+    {% else %}
+        <p>You currently have no appointments :/</p>
+    {% endif %}
 </ul>
+{% endblock %}
