@@ -14,6 +14,15 @@
             <a href="{% url 'services' %}">Services</a> |
             <a href="{% url 'appointments' %}">Appointments</a> |
             <a href="{% url 'customers_list' %}">Customers</a>
+
+
+            {% if user.is_authenticated %}
+                <span>Welcome, {{ user.first_name }}</span>
+                <a href="{% url 'logout' %}">Logout</a>
+            {% else %}
+                <a href="{% url 'login' %}">Login</a>
+                <a href="{% url 'register_customer' %}">Register</a>
+            {% endif %}
         </nav>
     </header>
 

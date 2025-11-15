@@ -1,6 +1,11 @@
 from django.db import models
+from django.contrib.auth.models import AbstractUser, User
+from django.conf import settings
 
 class Customer(models.Model):
+
+    user = models.OneToOneField(User, on_delete=models.CASCADE, null=True, blank=True)
+
     first_name = models.CharField(max_length=100)
     last_name = models.CharField(max_length=100)
     email = models.EmailField(unique=True)
@@ -13,6 +18,9 @@ class Customer(models.Model):
 
 
 class Employee(models.Model):
+
+    user = models.OneToOneField(User, on_delete=models.CASCADE, null=True, blank=True)
+
     first_name = models.CharField(max_length=100)
     last_name = models.CharField(max_length=100)
     specialty = models.CharField(max_length=100)
