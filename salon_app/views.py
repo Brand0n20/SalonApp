@@ -16,6 +16,10 @@ def services_list(request):
 def book_appointment(request):
     return render(request, 'salon_app/book_appointment.html')
 
+def appointments(request):
+    # Need to return diff types base on customer or employee
+    return render(request)
+
 def customer_profile(request, customer_id):
     customer = get_object_or_404(Customer, id=customer_id)
     appointments = Appointment.objects.filter(customer=customer)

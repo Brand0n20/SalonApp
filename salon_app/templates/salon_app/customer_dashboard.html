@@ -3,6 +3,6 @@
 <h2>Your Appointments:</h2>
 <ul>
     {% for a in appointments %}
-        <li>{{ a.date }} — {{ a.service.name }} with {{ a.employee.first_name }}</li>
+        <li>{{ a.appointment_date }} — {{ a.service.name }} with {{ a.employee.first_name }}</li>
     {% endfor %}
 </ul>
