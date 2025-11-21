@@ -1,0 +1,38 @@
+{% extends 'salon_app/base.html' %}
+{% load static %}
+
+{% block content %}
+<main>
+    <h2 class="text-center mt-20 mb-20">Your Appointments</h2>
+
+    {% if appointments %}
+        <div class="appointments-container">
+
+            {% for appt in appointments %}
+            <div class="appointment-card with-bg">
+                <div class="appointment-content">
+                    <p><strong>Date:</strong> {{ appt.appointment_date }}</p>
+                    <p><strong>Service:</strong> {{ appt.service.name }}</p>
+
+                    {% if appt.customer %}
+                    <p><strong>Customer:</strong> {{ appt.customer.user.username }}</p>
+                    {% endif %}
+
+                    {% if appt.employee %}
+                    <p><strong>Employee:</strong> {{ appt.employee.user.username }}</p>
+                    {% endif %}
+                </div>
+            </div>
+            {% endfor %}
+
+        </div>
+    {% else %}
+        <p class="text-center">No appointments found.</p>
+    {% endif %}
+    <div style="margin-top: 40px;">
+        <a href="{% url 'book_appointment' %}">
+            <button type="button">Book Appointment</button>
+        </a>
+    </div>
+</main>
+{% endblock %}

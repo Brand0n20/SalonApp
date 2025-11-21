@@ -13,12 +13,68 @@ def services_list(request):
     services = Service.objects.all()
     return render(request, 'salon_app/services_list.html', {'services': services})
 
+@login_required
 def book_appointment(request):
-    return render(request, 'salon_app/book_appointment.html')
+    # Logged-in User → Customer object
+    try:
+        customer = Customer.objects.get(user=request.user)
+    except Customer.DoesNotExist:
+        return render(request, "salon_app/error.html", {
+            "message": "You must be a customer to book appointments."
+        })
 
+    services = Service.objects.all()
+    employees = Employee.objects.all()
+
+    if request.method == "POST":
+        service_id = request.POST.get("service")
+        employee_id = request.POST.get("employee")
+        date = request.POST.get("appointment_date")
+
+        if not (service_id and employee_id and date):
+            return render(request, "salon_app/book_appoinment.html", {
+                "services": services,
+                "employees": employees,
+                "error": "All fields are required."
+            })
+
+        service = Service.objects.get(id=service_id)
+        employee = Employee.objects.get(id=employee_id)
+
+        Appointment.objects.create(
+            customer=customer,
+            employee=employee,
+            service=service,
+            appointment_date=date,
+        )
+
+        return redirect("customer_dashboard")  # Make sure this exists
+
+    return render(request, "salon_app/book_appoinment.html", {
+        "services": services,
+        "employees": employees
+    })
+
+@login_required
 def appointments(request):
-    # Need to return diff types base on customer or employee
-    return render(request, )
+    user = request.user
+
+    # Case 1: Logged in as customer
+    if hasattr(user, 'customer'):
+        appts = Appointment.objects.filter(customer=user.customer)
+
+    # Case 2: Logged in as employee
+    elif hasattr(user, 'employee'):
+        appts = Appointment.objects.filter(employee=user.employee)
+
+    # Case 3: User has neither profile
+    else:
+        return HttpResponseForbidden("No associated profile found.")
+
+    return render(request, 'salon_app/appointments.html', {
+        'appointments': appts
+    })
+
 
 def customer_profile(request, customer_id):
     customer = get_object_or_404(Customer, id=customer_id)
