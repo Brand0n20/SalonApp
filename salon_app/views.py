@@ -3,8 +3,9 @@ from django.http import HttpResponse, HttpResponseForbidden
 from django.shortcuts import render, get_object_or_404
 from django.contrib.auth import authenticate, login, logout
 from .forms import CustomerRegistrationForm
-from django.shortcuts import redirect
+from django.shortcuts import redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
+from django.utils import timezone
 
 def home(request):
     return render(request, 'salon_app/home.html')
@@ -15,45 +16,37 @@ def services_list(request):
 
 @login_required
 def book_appointment(request):
-    # Logged-in User → Customer object
-    try:
-        customer = Customer.objects.get(user=request.user)
-    except Customer.DoesNotExist:
-        return render(request, "salon_app/error.html", {
-            "message": "You must be a customer to book appointments."
-        })
-
-    services = Service.objects.all()
-    employees = Employee.objects.all()
-
     if request.method == "POST":
+        # Get selected service
         service_id = request.POST.get("service")
-        employee_id = request.POST.get("employee")
-        date = request.POST.get("appointment_date")
-
-        if not (service_id and employee_id and date):
-            return render(request, "salon_app/book_appoinment.html", {
-                "services": services,
-                "employees": employees,
-                "error": "All fields are required."
-            })
-
         service = Service.objects.get(id=service_id)
-        employee = Employee.objects.get(id=employee_id)
 
+        # Get selected date and time
+        date = request.POST.get("date")  # format: 'YYYY-MM-DD'
+        time = request.POST.get("time")  # format: 'HH:MM'
+
+        # Combine date and time into a datetime object
+        from datetime import datetime
+        appointment_datetime = datetime.strptime(f"{date} {time}", "%Y-%m-%d %H:%M")
+
+        # Choose an employee (example: first available)
+        employee = Employee.objects.first()  # you can later add availability logic
+
+        # Create appointment
         Appointment.objects.create(
-            customer=customer,
+            customer=request.user.customer,  # assuming user has customer profile
             employee=employee,
             service=service,
-            appointment_date=date,
+            appointment_date=appointment_datetime
         )
 
-        return redirect("customer_dashboard")  # Make sure this exists
+        # Redirect to customer dashboard or appointments page
+        return redirect('customer_dashboard')
 
-    return render(request, "salon_app/book_appoinment.html", {
-        "services": services,
-        "employees": employees
-    })
+    else:
+        # GET request: show form with all active services
+        services = Service.objects.all()
+        return render(request, 'salon_app/book_appointment.html', {'services': services})
 
 @login_required
 def appointments(request):
@@ -61,11 +54,11 @@ def appointments(request):
 
     # Case 1: Logged in as customer
     if hasattr(user, 'customer'):
-        appts = Appointment.objects.filter(customer=user.customer)
+        appts = Appointment.objects.filter(customer=user.customer, status='Scheduled')
 
     # Case 2: Logged in as employee
     elif hasattr(user, 'employee'):
-        appts = Appointment.objects.filter(employee=user.employee)
+        appts = Appointment.objects.filter(employee=user.employee, status='Scheduled')
 
     # Case 3: User has neither profile
     else:
@@ -74,6 +67,27 @@ def appointments(request):
     return render(request, 'salon_app/appointments.html', {
         'appointments': appts
     })
+
+@login_required
+def cancel_appointment(request, appointment_id):
+    # Get the appointment
+    appointment = get_object_or_404(Appointment, id=appointment_id)
+
+    # Ensure the user is allowed to cancel it
+    if hasattr(request.user, 'customer') and appointment.customer != request.user.customer:
+        return HttpResponseForbidden("You cannot cancel someone else's appointment.")
+    if hasattr(request.user, 'employee') and appointment.employee != request.user.employee:
+        return HttpResponseForbidden("You cannot cancel someone else's appointment.")
+
+    # Update status to Cancelled
+    appointment.status = "Cancelled"
+    appointment.save()
+
+    # Redirect back to dashboard or appointments page
+    if hasattr(request.user, 'customer'):
+        return redirect('customer_dashboard')
+    else:
+        return redirect('employee_dashboard')
 
 
 def customer_profile(request, customer_id):
@@ -139,7 +153,7 @@ def customer_dashboard(request):
         return redirect('login')
 
     customer = request.user.customer
-    appointments = Appointment.objects.filter(customer=customer)
+    appointments = Appointment.objects.filter(customer=customer, status='Scheduled')
 
     return render(request, 'salon_app/customer_dashboard.html', {
         'customer': customer,
