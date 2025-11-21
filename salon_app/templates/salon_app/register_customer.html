@@ -1,0 +1,15 @@
+{% extends 'salon_app/base.html' %}
+
+{% block title %}Register{% endblock %}
+
+<h2>Register as a New Customer</h2>
+
+{% block content %}
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Register</button>
+</form>
+
+<p><a href="{% url 'home' %}">Back to Home</a></p>
+{% endblock %}

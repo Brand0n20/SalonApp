@@ -5,7 +5,7 @@
 <ul>
   {% for service in services %}
     <li>
-      <strong>{{ service.name }}</strong> - {{ service.price}}
+      <strong>{{ service.name }}</strong> - ${{ service.price}}
       <li>{{ service.description }}</li>
       <li>Duration: {{ service.duration_minutes }} mins</li>
     </li>

@@ -8,11 +8,11 @@
 }
 
 body {
-    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-family: 'Quicksand', sans-serif; /* thin + curvy */
     font-size: 16px;
     line-height: 1.6;
-    background-color: #fdf6f0;
-    color: #333;
+    background-color: #f3efe6; /* soft earthy beige */
+    color: #3b322c; /* warm deep brown */
     min-height: 100vh;
 }
 
@@ -20,11 +20,11 @@ body {
    Header
 ----------------------------- */
 header {
-    background-color: #f4a261;
-    color: white;
+    background-color: #a68a64; /* muted earthy tan */
+    color: #fdfcf8;
     padding: 20px 0;
     text-align: center;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
 }
 
 header h1 {
@@ -36,21 +36,21 @@ header h1 {
    Navigation
 ----------------------------- */
 nav {
-    background-color: #e76f51;
+    background-color: #6b705c; /* earthy olive */
     padding: 10px 0;
     text-align: center;
 }
 
 nav a {
-    color: white;
+    color: #fdfcf8;
     text-decoration: none;
     margin: 0 15px;
-    font-weight: bold;
+    font-weight: 600;
     transition: color 0.3s;
 }
 
 nav a:hover {
-    color: #ffddc1;
+    color: #d8cfc4; /* light beige hover */
 }
 
 /* -----------------------------
@@ -66,8 +66,8 @@ main {
    Buttons
 ----------------------------- */
 button, .btn {
-    background-color: #f4a261;
-    color: white;
+    background-color: #a68a64; /* earthy tan */
+    color: #fdfcf8;
     padding: 10px 20px;
     border: none;
     border-radius: 6px;
@@ -77,88 +77,38 @@ button, .btn {
 }
 
 button:hover, .btn:hover {
-    background-color: #e76f51;
+    background-color: #6b705c; /* olive hover */
 }
+
+/* -------------*
 
 /* -----------------------------
-   Forms
+   Appointment Cards
 ----------------------------- */
-input[type="text"], input[type="email"], input[type="password"], select, textarea {
-    width: 100%;
-    padding: 10px;
-    margin: 8px 0 15px 0;
-    border: 1px solid #ccc;
-    border-radius: 6px;
+.appointments-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
+    margin-bottom: 30px;
 }
 
-label {
-    font-weight: bold;
-    display: block;
-    margin-bottom: 5px;
+.appointment-card {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 3px 6px rgba(0,0,0,0.08);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
-/* -----------------------------
-   Tables
------------------------------ */
-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-bottom: 20px;
+.appointment-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 12px rgba(0,0,0,0.12);
 }
 
-th, td {
-    padding: 12px;
-    border: 1px solid #ccc;
-    text-align: left;
+.appointment-card p {
+    margin-bottom: 8px;
+    font-size: 1rem;
+    color: #333;
 }
 
-th {
-    background-color: #f4a261;
-    color: white;
-}
-
-/* -----------------------------
-   Footer
------------------------------ */
-footer {
-    text-align: center;
-    padding: 15px 0;
-    background-color: #e76f51;
-    color: white;
-    position: relative;
-    bottom: 0;
-    width: 100%;
-}
-
-/* -----------------------------
-   Utility Classes
------------------------------ */
-.text-center {
-    text-align: center;
-}
-
-.mt-20 {
-    margin-top: 20px;
-}
-
-.mb-20 {
-    margin-bottom: 20px;
-}
-
-.hidden {
-    display: none;
-}
-
-/* -----------------------------
-   Responsive
------------------------------ */
-@media (max-width: 768px) {
-    nav a {
-        display: block;
-        margin: 10px 0;
-    }
-
-    header h1 {
-        font-size: 2em;
-    }
-}

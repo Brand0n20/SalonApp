@@ -1,6 +1,16 @@
 {% extends 'salon_app/base.html' %}
+
 {% block title %}Home{% endblock %}
+
 {% block content %}
 <h2>Welcome to the Reimagined Studio Beauty Salon Appointment System!</h2>
-<p>Book an appointment or explore our services below.</p>
+
+{% if user.is_authenticated %}
+<a href="{% url 'customer_dashboard' %}">Go To Your Appointments</a>
+{% else %}
+<div class="auth-options">
+    <a href="{% url 'login' %}" class="btn">Login</a>
+    <a href="{% url 'register_customer' %}" class="btn">Sign Up</a>
+</div>
+{% endif %}
 {% endblock %}
