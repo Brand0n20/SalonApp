@@ -9,7 +9,7 @@
         <div class="appointments-container">
 
             {% for appt in appointments %}
-            <div class="appointment-card with-bg">
+            <div class="appointment-card with-bg" style="margin: 30px;">
                 <div class="appointment-content">
                     <p><strong>Date:</strong> {{ appt.appointment_date }}</p>
                     <p><strong>Service:</strong> {{ appt.service.name }}</p>
@@ -22,6 +22,13 @@
                     <p><strong>Employee:</strong> {{ appt.employee.user.username }}</p>
                     {% endif %}
                 </div>
+                 <!-- Cancel form -->
+                <form method="POST" action="{% url 'cancel_appointment' appt.id %}" style="display:inline;">
+                    {% csrf_token %}
+                    <button type="submit" onclick="return confirm('Are you sure you want to cancel this appointment?');">
+                        Cancel
+                    </button>
+                </form>
             </div>
             {% endfor %}
 
